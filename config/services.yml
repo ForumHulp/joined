@@ -1,0 +1,7 @@
+services:
+    forumhulp.joined.listener:
+        class: forumhulp\joined\event\listener
+        arguments:
+            - @user
+        tags:
+            - { name: event.listener }

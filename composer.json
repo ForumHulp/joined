@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "An extension removing time from join date without influencing other datformats.",
 	"homepage": "http://forumhulp.com",
-	"version": "3.1.3",
+	"version": "3.1.4",
 	"keywords": ["phpbb", "extension", "join", "award"],
 	"license": "GPL-2.0",
 	"authors": [

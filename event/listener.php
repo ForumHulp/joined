@@ -34,29 +34,22 @@ class listener implements EventSubscriberInterface
 	public function __construct(\phpbb\user $user)
 	{
 		$this->user = $user;
+		$this->date_format = str_replace(array(',', 'H', ':', 'i', 'g', 'a'), '', $this->user->data['user_dateformat']);
 	}
 
 	public function add_page_header_link($event)
 	{
 		$poster_data = $event['row'];
-		$date_format = str_replace(array(',', 'H', ':', 'i', 'g', 'a'), '', $this->user->data['user_dateformat']);
-		// get element
-		$joined = $this->user->format_date($poster_data['user_regdate'], $date_format);
 		$b = $event['user_cache_data'];
-		$b['joined'] = $joined;
-		// store the element again
+		$b['joined'] = $this->user->format_date($poster_data['user_regdate'], $this->date_format);
 		$event['user_cache_data'] = $b;
 	}
 
 	public function modify_memberlist($event)
 	{
 		$poster_data = $event['data'];
-		$date_format = str_replace(array(',', 'H', ':', 'i', 'g', 'a'), '', $this->user->data['user_dateformat']);
-		// get element
-		$joined = $this->user->format_date($poster_data['user_regdate'], $date_format);
 		$b = $event['template_data'];
-		$b['JOINED'] = $joined;
-		// store the element again
+		$b['JOINED'] = $this->user->format_date($poster_data['user_regdate'], $this->date_format);
 		$event['template_data'] = $b;
 	}
 }
